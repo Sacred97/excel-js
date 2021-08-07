@@ -60,9 +60,9 @@ module.exports = (env, argv) => {
       port: '3000',
       open: true,
       // Не обновляет html, но при изменениях страница не перезагружается полностью и весь контент остается (например в input)
-      hot: true,
+      // hot: true,
       // Обновляет так же html но полностью перезагружает страницу
-      // watchContentBase: true
+      watchContentBase: true
     },
     plugins: plugins(),
     module: {
