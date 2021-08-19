@@ -3,22 +3,27 @@ const CHAR_CODES = {
     Z: 90
 }
 
-function createCell() {
+function createCell(_, col) {
+    return `<div class="cell" contenteditable data-col="${col}"></div>`
+}
+
+function createColumn(column, index) {
     return `
-        <div class="cell" contenteditable>
-            
-        </div>
+    <div class="column" data-type="resizable" data-col="${index}">
+        ${column} 
+        <div class="col-resize" data-resize="col"></div> 
+    </div>
     `
 }
 
-function createColumn(column) {
-    return `<div class="column">${column}</div>`
-}
-
 function createRow(content, numberRow = null) {
+    const resize = numberRow?'<div class="row-resize" data-resize="row"></div>':''
     return `
-        <div class="row">
-            <div class="row-info">${numberRow?numberRow:''}</div>
+        <div class="row" data-type="resizable">
+            <div class="row-info">
+                ${numberRow?numberRow:''}
+                ${resize}
+            </div>
             <div class="row-data">${content}</div>
         </div>
     `
