@@ -3,8 +3,22 @@ const CHAR_CODES = {
     Z: 90
 }
 
-function createCell(_, col) {
-    return `<div class="cell" contenteditable data-col="${col}"></div>`
+// function createCell(row, col) {
+//     return `<div class="cell" contenteditable data-col="${col}" data-row="${row}"></div>`
+// }
+
+function createCell(row) {
+    return function (_, col) {
+        return `
+            <div class="cell" 
+                contenteditable data-col="${col}" 
+                data-row="${row}"
+                data-type="cell"
+                data-id="${row}:${col}"
+                >
+            </div>
+        `
+    }
 }
 
 function createColumn(column, index) {
@@ -46,7 +60,11 @@ export function createTable(rowsCount = 15) {
     rows.push(createRow(columns))
 
     for (let i = 0; i < rowsCount; i++) {
-        const cells = new Array(columnsCount).fill('').map(createCell).join('')
+        const cells = new Array(columnsCount)
+            .fill('')
+            .map((_, col) => createCell(i, col))
+            .map(createCell(i))
+            .join('')
         rows.push(createRow(cells, i+1))
     }
 
