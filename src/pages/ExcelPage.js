@@ -1,6 +1,6 @@
 import {Page} from "../core/Page";
 import {rootReducer} from "../redux/rootReducer";
-import {createStore} from "../core/createStore";
+import {createStore} from "../core/store/createStore";
 import {debounce, storage} from "../core/utils";
 import {Header} from "../components/header/Header";
 import {Toolbar} from "../components/toolbar/Toolbar";
